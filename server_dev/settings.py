@@ -78,9 +78,9 @@ WSGI_APPLICATION = 'server_dev.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'HOST': '112.147.50.202',
+        'HOST': '3.36.85.60',
         'NAME': 'server_dev',
-        'USER': 'pi',
+        'USER': 'ubuntu',
         'PASSWORD': 'admin123!',
         'PORT': '3306',
         'OPTIONS': {'charset': 'utf8mb4'},
