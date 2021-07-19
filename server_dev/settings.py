@@ -78,10 +78,10 @@ WSGI_APPLICATION = 'server_dev.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'HOST': '3.36.85.60',
+        'HOST': '52.79.85.103',
         'NAME': 'server_dev',
-        'USER': 'ubuntu',
-        'PASSWORD': 'admin123!',
+        'USER': 'root',
+        'PASSWORD': 'trol29234!',
         'PORT': '3306',
         'OPTIONS': {'charset': 'utf8mb4'},
     }
