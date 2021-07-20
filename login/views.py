@@ -30,11 +30,12 @@ class GetPhoto(APIView):
         paginator = Paginator(photo_all, page_size)
         photo = paginator.get_page(page)
 
+        photo_data = photo.object_list
         data = dict(
             page_info=dict(
                 page=page,
                 page_size=page_size
             ),
-            photo=photo.object_list.values()
+            photo=photo_data.values()
         )
         return Response(data=data)
