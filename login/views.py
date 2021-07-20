@@ -13,8 +13,8 @@ class RegistUser(APIView):
 
         # 클라이언트한테 내려줄 데이터 정의
         data = dict(
-            user_id=user_id,
-            user_pw=user_pw
+            status=200,
+            msg="성공"
         )
 
         return Response(data=data)
