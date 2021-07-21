@@ -25,8 +25,8 @@ class RegistUser(APIView):
 class GetPhoto(APIView):
     def get(self, request):
         photo_all = LoginUser.objects.all()
-        page = int(request.data.get('page', 1))
-        page_size = request.data.get('size', 5)
+        page = int(request.GET.get('page', 1))
+        page_size = request.GET.get('size', 5)
         paginator = Paginator(photo_all, page_size)
         photo = paginator.get_page(page)
 
