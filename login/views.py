@@ -1,11 +1,10 @@
 # login/views.py
-from django.shortcuts import render
-from rest_framework.views import APIView
+from django.core.paginator import Paginator
 from rest_framework.response import Response
+from rest_framework.views import APIView
+
 from .models import LoginUser
 
-from django.core.paginator import Paginator
-from django.http import JsonResponse
 
 class RegistUser(APIView):
     def post(self, request):
@@ -29,12 +28,13 @@ class GetPhoto(APIView):
         page_size = request.GET.get('size', 5)
         paginator = Paginator(photo_all, page_size)
         photo = paginator.get_page(page)
-
         photo_data = photo.object_list
+        total_elements = LoginUser.objects.count()
         data = dict(
             page_info=dict(
                 page=page,
-                page_size=page_size
+                page_size=page_size,
+                total_elements=total_elements
             ),
             photo=photo_data.values()
         )
