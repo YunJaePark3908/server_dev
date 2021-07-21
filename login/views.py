@@ -2,6 +2,7 @@
 from django.core.paginator import Paginator
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from sqlalchemy import null
 
 from .models import LoginUser
 
@@ -24,18 +25,30 @@ class RegistUser(APIView):
 class GetPhoto(APIView):
     def get(self, request):
         photo_all = LoginUser.objects.all()
-        page = int(request.GET.get('page', 1))
-        page_size = request.GET.get('size', 5)
+        page = request.GET.get('page')
+        page_size = request.GET.get('size')
+        total_elements = LoginUser.objects.count()
         paginator = Paginator(photo_all, page_size)
         photo = paginator.get_page(page)
         photo_data = photo.object_list
-        total_elements = LoginUser.objects.count()
-        data = dict(
-            page_info=dict(
-                page=page,
-                page_size=page_size,
-                total_elements=total_elements
-            ),
-            photo=photo_data.values()
-        )
+
+        if int(page) * int(page_size) > total_elements + int(page_size):
+            data = dict(
+                page_info=dict(
+                    page=page,
+                    page_size=page_size,
+                    total_elements=total_elements
+                ),
+                photo=""
+            )
+        else:
+            data = dict(
+                page_info=dict(
+                    page=page,
+                    page_size=page_size,
+                    total_elements=total_elements
+                ),
+                photo=photo_data.values()
+            )
+
         return Response(data=data)
