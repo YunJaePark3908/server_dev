@@ -56,15 +56,15 @@ class GetPhoto(APIView):
 
         return Response(data=data)
 
-@api_view(['GET'])
-def APKDownload(request, path):
-    file_name = request.GET.get('file_name', '')
-    if file_name == '':
-        return None
-    file_path = '/home/ubuntu/Downloads'
-    if os.path.exists(file_path):
-        with open(file_path, 'rb') as fh:
-            response = HttpResponse(fh.read(), content_type="application/vnd.android.package-archive")
-            response['Content-Disposition'] = 'inline; filename=' + file_name
-            return response
-    raise Http404
+# @api_view(['GET'])
+# def APKDownload(request, path):
+#     file_name = request.GET.get('file_name', '')
+#     if file_name == '':
+#         return None
+#     file_path = '/home/ubuntu/Downloads'
+#     if os.path.exists(file_path):
+#         with open(file_path, 'rb') as fh:
+#             response = HttpResponse(fh.read(), content_type="application/vnd.android.package-archive")
+#             response['Content-Disposition'] = 'inline; filename=' + file_name
+#             return response
+#     raise Http404
