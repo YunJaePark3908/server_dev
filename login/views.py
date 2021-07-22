@@ -1,14 +1,14 @@
 # login/views.py
 
+import os
+
 from django.core.paginator import Paginator
-from rest_framework.decorators import api_view
+from django.http import HttpResponse, Http404
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from .models import LoginUser
-import os
-from django.conf import settings
-from django.http import HttpResponse, Http404
+
 
 class RegistUser(APIView):
     def post(self, request):
@@ -56,15 +56,15 @@ class GetPhoto(APIView):
 
         return Response(data=data)
 
-# @api_view(['GET'])
-# def APKDownload(request, path):
-#     file_name = request.GET.get('file_name', '')
-#     if file_name == '':
-#         return None
-#     file_path = '/home/ubuntu/Downloads'
-#     if os.path.exists(file_path):
-#         with open(file_path, 'rb') as fh:
-#             response = HttpResponse(fh.read(), content_type="application/vnd.android.package-archive")
-#             response['Content-Disposition'] = 'inline; filename=' + file_name
-#             return response
-#     raise Http404
+class APKDownload(APIView):
+    def get(self, request):
+        file_name = request.GET.get('file_name', '')
+        if file_name == '':
+            return None
+        file_path = '/home/ubuntu/Downloads'
+        if os.path.exists(file_path):
+            with open(file_path, 'rb') as fh:
+                response = HttpResponse(fh.read(), content_type="application/vnd.android.package-archive")
+                response['Content-Disposition'] = 'inline; filename=' + file_name
+                return response
+        raise Http404
