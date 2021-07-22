@@ -61,7 +61,7 @@ class APKDownload(APIView):
         file_name = request.GET.get('file_name', '')
         if file_name == '':
             return None
-        file_path = '/home/ubuntu/Downloads'
+        file_path = 'home/ubuntu/Downloads'
         if os.path.exists(file_path):
             with open(file_path, 'rb') as fh:
                 response = HttpResponse(fh.read(), content_type="application/vnd.android.package-archive")
