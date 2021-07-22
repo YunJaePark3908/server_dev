@@ -1,10 +1,13 @@
 # login/views.py
 from django.core.paginator import Paginator
+from django.http import HttpResponse
+from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from sqlalchemy import null
 
 from .models import LoginUser
+import mimetypes
 
 
 class RegistUser(APIView):
@@ -52,3 +55,21 @@ class GetPhoto(APIView):
             )
 
         return Response(data=data)
+
+class DownLoadAPK(APIView):
+    @api_view(['GET'])
+    def static_serving(request):
+        file_name = request.GET.get('file_name', '')
+
+        if file_name == '':
+            return None
+
+        fl_path = '/home/ubuntu/Downloads/'+file_name
+        filename = file_name
+
+        fl = open(fl_path, 'r')
+        mime_type, _ = mimetypes.guess_type(fl_path)
+        response = HttpResponse(fl, content_type=mime_type)
+        response['Content-Disposition'] = "attachment; filename=%s" % filename
+
+        return response
