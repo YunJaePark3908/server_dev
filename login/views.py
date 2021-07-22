@@ -65,7 +65,7 @@ class DownLoadAPK(APIView):
         fl_path = '/home/ubuntu/Downloads/'+file_name
         filename = file_name
 
-        fl = open(fl_path, 'r')
+        fl = open(fl_path, 'r', encoding="utf-8")
         response = HttpResponse(fl, content_type='application/force-download')
         response['Content-Disposition'] = "attachment; filename=%s" % filename
 
