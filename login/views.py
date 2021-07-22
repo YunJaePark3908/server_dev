@@ -1,4 +1,6 @@
 # login/views.py
+from imp import reload
+
 from django.core.paginator import Paginator
 from django.http import HttpResponse
 from rest_framework.decorators import api_view
@@ -8,6 +10,7 @@ from sqlalchemy import null
 
 from .models import LoginUser
 import mimetypes
+import sys
 
 
 class RegistUser(APIView):
@@ -59,6 +62,9 @@ class GetPhoto(APIView):
 class DownLoadAPK(APIView):
     @api_view(['GET'])
     def static_serving(request):
+        reload(sys)
+        sys.setdefaultencoding('utf8')
+
         file_name = request.GET.get('file_name', '')
 
         if file_name == '':
