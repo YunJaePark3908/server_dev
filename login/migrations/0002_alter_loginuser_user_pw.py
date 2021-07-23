@@ -11,7 +11,7 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.AlterField(
-            model_name='loginuser',
+            model_name='LoginUser',
             name='user_pw',
             field=models.CharField(default=False, max_length=100),
         ),
