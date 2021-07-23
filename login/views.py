@@ -4,6 +4,7 @@ import os
 
 from django.core.paginator import Paginator
 from django.http import HttpResponse, Http404
+from rest_framework import permissions
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -26,6 +27,8 @@ class RegistUser(APIView):
         return Response(data=data)
 
 class GetPhoto(APIView):
+    permission_classes = [permissions.AllowAny]
+    authentication_classes = []
     def get(self, request):
         photo_all = LoginUser.objects.all()
         page = request.GET.get('page')
