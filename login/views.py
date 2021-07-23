@@ -61,13 +61,18 @@ class GetPhoto(APIView):
 
 class APKDownload(APIView):
     def get(self, request):
-        file_name = request.GET.get('file_name', '')
-        if file_name == '':
-            return None
-        file_path = 'home/ubuntu/Downloads'
-        if os.path.exists(file_path):
-            with open(file_path, 'rb') as fh:
-                response = HttpResponse(fh.read(), content_type="application/vnd.android.package-archive")
-                response['Content-Disposition'] = 'inline; filename=' + file_name
-                return response
-        raise Http404
+        # file_name = request.GET.get('file_name', '')
+        # if file_name == '':
+        #     return None
+        # file_path = 'home/ubuntu/Downloads'
+        # if os.path.exists(file_path):
+        #     with open(file_path, 'rb') as fh:
+        #         response = HttpResponse(fh.read(), content_type="application/vnd.android.package-archive")
+        #         response['Content-Disposition'] = 'inline; filename=' + file_name
+        #         return response
+        # raise Http404
+        data = dict(
+            statuse=200,
+            msg="성공"
+        )
+        return Response(data=data)
