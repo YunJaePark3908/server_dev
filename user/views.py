@@ -19,7 +19,7 @@ class RegUserInfo(APIView):
         login_type = request.data.get('login_type', "")
 
         response = requests.post(
-            "http://localhost:8000/api/token/",
+            "http://52.79.85.103/api/token/",
             json={"username": "trol", "password": "trol29234!"}
         )
         tokens = "jwt " + response.json()
